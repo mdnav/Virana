@@ -1,0 +1,284 @@
+{
+  "project_name": "VIRANA",
+  "tagline": "Explore. Experience. Preserve.",
+  "positioning": "Google Maps for Cultural Heritage + Wikipedia for Living Culture + AI Cultural Guide + Visual Heritage Recognition + Cultural Voice Archive + Community Preservation Network",
+  "emotional_archetype": "Ancient India + High-Precision Modern Technology (Sacred Ochre, Temple Basalt, Indigo Night, Royal Amber, Terracotta & Vedic Gold)",
+  "context_type": "hybrid_fullstack",
+  "theme_support": {
+    "default_mode": "dark",
+    "has_toggle": true,
+    "light_mode_personality": "Warm handcrafted parchment, temple stone ivory, terracotta & royal lapis accents",
+    "dark_mode_personality": "Deep midnight basalt, obsidian sanctuary, molten gold, saffron sparks, illuminated manuscript aura"
+  },
+  "typography": {
+    "font_family_recommendations": {
+      "display_heading": "'Cinzel Decorative', 'Playfair Display', 'Cormorant Garamond', serif",
+      "sub_heading": "'Cabinet Grotesk', 'Outfit', 'Chivo', sans-serif",
+      "body": "'Plus Jakarta Sans', 'IBM Plex Sans', sans-serif",
+      "indic_accent": "'Rozha One', 'Tiro Devanagari Hindi', serif",
+      "mono_data": "'JetBrains Mono', monospace"
+    },
+    "google_fonts_embed_url": "https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rozha+One&family=JetBrains+Mono:wght@400;500&display=swap",
+    "hierarchy_scale": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight leading-tight",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-serif tracking-tight",
+      "h3_card_title": "text-xl sm:text-2xl font-sans font-semibold",
+      "h4_widget": "text-lg sm:text-xl font-sans font-medium",
+      "body_lead": "text-base sm:text-lg font-sans leading-relaxed text-muted-foreground",
+      "body_default": "text-sm sm:text-base font-sans leading-relaxed",
+      "caption_overline": "text-xs uppercase tracking-[0.22em] font-mono text-amber-500 font-semibold",
+      "badge": "text-xs font-mono font-medium px-2.5 py-1 rounded-full"
+    },
+    "anti_patterns": [
+      "NEVER use plain Inter or Roboto for H1, H2, or Hero headers",
+      "NEVER exceed text-6xl for hero headings on standard breakpoints",
+      "Maintain max 2 Tailwind size jump between heading and immediate subtitle"
+    ]
+  },
+  "colors": {
+    "hsl_variables": {
+      "root_light": {
+        "--background": "35 30% 98%",
+        "--foreground": "20 25% 10%",
+        "--card": "36 28% 95%",
+        "--card-foreground": "20 25% 12%",
+        "--popover": "35 30% 98%",
+        "--popover-foreground": "20 25% 10%",
+        "--primary": "24 85% 45%",
+        "--primary-foreground": "35 30% 98%",
+        "--secondary": "38 45% 90%",
+        "--secondary-foreground": "24 70% 20%",
+        "--muted": "36 20% 92%",
+        "--muted-foreground": "25 15% 40%",
+        "--accent": "42 90% 48%",
+        "--accent-foreground": "20 30% 10%",
+        "--destructive": "0 75% 50%",
+        "--destructive-foreground": "0 0% 98%",
+        "--border": "35 20% 86%",
+        "--input": "35 20% 86%",
+        "--ring": "24 85% 45%",
+        "--heritage-saffron": "27 96% 54%",
+        "--heritage-gold": "43 89% 52%",
+        "--heritage-terracotta": "16 75% 48%",
+        "--heritage-indigo": "228 65% 24%",
+        "--heritage-emerald": "158 64% 32%",
+        "--radius": "0.75rem"
+      },
+      "dark_theme": {
+        "--background": "220 25% 6%",
+        "--foreground": "38 25% 94%",
+        "--card": "220 24% 9%",
+        "--card-foreground": "38 25% 96%",
+        "--popover": "220 24% 9%",
+        "--popover-foreground": "38 25% 96%",
+        "--primary": "28 92% 54%",
+        "--primary-foreground": "220 30% 8%",
+        "--secondary": "220 20% 14%",
+        "--secondary-foreground": "38 30% 92%",
+        "--muted": "220 20% 14%",
+        "--muted-foreground": "220 12% 65%",
+        "--accent": "43 92% 54%",
+        "--accent-foreground": "220 30% 8%",
+        "--destructive": "0 68% 50%",
+        "--destructive-foreground": "0 0% 98%",
+        "--border": "220 18% 18%",
+        "--input": "220 18% 18%",
+        "--ring": "28 92% 54%",
+        "--heritage-saffron": "28 94% 56%",
+        "--heritage-gold": "43 95% 56%",
+        "--heritage-terracotta": "16 80% 55%",
+        "--heritage-indigo": "224 75% 65%",
+        "--heritage-emerald": "158 60% 45%",
+        "--radius": "0.75rem"
+      }
+    },
+    "brand_palette_rules": [
+      "FORBIDDEN: Generic neon purple AI gradients (#7351B7).",
+      "Primary CTA: Royal Saffron (#F56A1E / hsl(28 92% 54%)) or Vedic Warm Gold (#E89B17 / hsl(43 92% 54%)).",
+      "Background anchors: Basalt Night (#0D1117 / #0B0E14) in dark mode, Sandstone Parchment (#FAF7F2) in light mode.",
+      "Accent highlights: Terracotta (#C85A32), Royal Indigo (#3B5998 / #2B3A67), Patina Emerald (#1B7A56).",
+      "Glow & Tracing effects: 1px gold/amber illuminated strokes with subtle blur-sm ambient glow."
+    ]
+  },
+  "spacing_and_layout": {
+    "spacing_scale": "Tailwind standard with generous breathing room (p-4, p-6, p-8, p-12, p-16, p-24, p-32).",
+    "bento_grid_rules": "Use Mode A Tetris Grid for Category Explorer and Preservation sections. Mix col-span-8, col-span-4, col-span-2 with row spans. Never make boring equal boxes.",
+    "border_padding_mandate": "Every card with border must have internal padding (p-5 to p-8) to prevent text collision.",
+    "container_max_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "image_constraints": "Mobile height max max-h-[70vh] with rounded-2xl border border-white/10"
+  },
+  "navigation_and_header": {
+    "style": "Glassmorphism with Optical Clarity (backdrop-blur-xl bg-background/80 border-b border-border/60 sticky top-0 z-50)",
+    "elements": [
+      "Brand Emblem (Geometric Ashoka/Mandala vector) + 'VIRANA' logotype with 'विराना' subtle superscript",
+      "Primary Nav: Explore Map, Living Culture, Ask AI, HeritageLens, Preservation, Cultural Calendar",
+      "Action Group: Multilingual Switcher (EN / हिं / తె), Dark/Light Toggle, 'Share Heritage' CTA button"
+    ],
+    "mobile_rule": "Desktop shows full links. Mobile collapses into side drawer with sliding animation."
+  },
+  "image_urls": [
+    {
+      "category": "Hero / Monuments",
+      "title": "Taj Mahal, Agra",
+      "image_url": "https://images.unsplash.com/photo-1585135497273-1a86b09fe70e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwyfHxJbmRpYSUyMG1vbnVtZW50JTIwVGFqJTIwTWFoYWwlMjBIYW1waXxlbnwwfHx8fDE3ODgwOTc3MTJ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "The majestic Taj Mahal framed by foliage with serene atmosphere"
+    },
+    {
+      "category": "Monuments / Architecture",
+      "title": "Taj Mahal Grand Vista",
+      "image_url": "https://images.unsplash.com/photo-1526711657229-e7e080ed7aa1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwxfHxJbmRpYSUyMG1vbnVtZW50JTIwVGFqJTIwTWFoYWwlMjBIYW1waXxlbnwwfHx8fDE3ODgwOTc3MTF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Reflecting pool and grand dome architectural symmetry"
+    },
+    {
+      "category": "Performing Arts / Dance",
+      "title": "Kathakali Classical Drama",
+      "image_url": "https://images.unsplash.com/photo-1715181751269-2c8325468b73?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwzfHxrYXRoYWthbGklMjBkYW5jZSUyMGluZGlhfGVufDB8fHx8MTc4NDM3MjgwMXww&ixlib=rb-4.1.0&q=85",
+      "description": "Dramatic Kathakali performer in traditional green face makeup and ornate headgear"
+    },
+    {
+      "category": "Performing Arts / Dance",
+      "title": "Temple Dancers on Stone Steps",
+      "image_url": "https://images.unsplash.com/photo-1756370256926-e48ca54c5efe?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxrYXRoYWthbGklMjBkYW5jZSUyMGluZGlhfGVufDB8fHx8MTc4NDM3MjgwMXww&ixlib=rb-4.1.0&q=85",
+      "description": "Classical Indian dancers performing in traditional silk attire on ancient stone steps"
+    },
+    {
+      "category": "Performing Arts / Ritual Theatre",
+      "title": "Kathakali Duet in Sacred Regalia",
+      "image_url": "https://images.unsplash.com/photo-1783068207042-f8b23b4dbdfa?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHw0fHxrYXRoYWthbGklMjBkYW5jZSUyMGluZGlhfGVufDB8fHx8MTc4NDM3MjgwMXww&ixlib=rb-4.1.0&q=85",
+      "description": "Two traditional Kerala performers in elaborate sacred characters"
+    },
+    {
+      "category": "Food, Spices & Living Knowledge",
+      "title": "Vedic Spices & Traditional Bazaar",
+      "image_url": "https://images.unsplash.com/photo-1546702005-7f8e5aeab4a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxJbmRpYW4lMjBzcGljZXMlMjBmb29kJTIwbWFya2V0JTIwdHJhZGl0aW9uYWx8ZW58MHx8fHwxNzg4MDk3NzEyfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Assorted sacks of turmeric, cardamom, cloves, and indigenous spice powders"
+    },
+    {
+      "category": "Food, Spices & Living Knowledge",
+      "title": "Heritage Spice Heaps & Herbal Remedies",
+      "image_url": "https://images.unsplash.com/photo-1758745464235-ccb8c1253074?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxJbmRpYW4lMjBzcGljZXMlMjBmb29kJTIwbWFya2V0JTIwdHJhZGl0aW9uYWx8ZW58MHx8fHwxNzg4MDk3NzEyfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Piles of vibrant yellow turmeric, red chillies, and aromatic mountain herbs in brass vessels"
+    },
+    {
+      "category": "Food, Spices & Living Knowledge",
+      "title": "Old Delhi Spice Merchant",
+      "image_url": "https://images.unsplash.com/photo-1775433205046-86e060feff06?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHw0fHxJbmRpYW4lMjBzcGljZXMlMjBmb29kJTIwbWFya2V0JTIwdHJhZGl0aW9uYWx8ZW58MHx8fHwxNzg4MDk3NzEyfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Traditional vendor measuring authentic spices in historic market quarter"
+    },
+    {
+      "category": "Heritage at Risk / Traditional Crafts",
+      "title": "Sun-Dried Red Pepper Harvest",
+      "image_url": "https://images.unsplash.com/photo-1723155182094-af2f63472d0b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwzfHxJbmRpYW4lMjBzcGljZXMlMjBmb29kJTIwbWFya2V0JTIwdHJhZGl0aW9uYWx8ZW58MHx8fHwxNzg4MDk3NzEyfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Organic sundrying agricultural heritage practice in rural India"
+    }
+  ],
+  "key_features_and_components": {
+    "homepage_hero": {
+      "headline": "Discover the Living Heritage of India",
+      "subheadline": "An AI-powered, community-rooted sanctuary mapping ancient monuments, endangered oral dialects, performing arts, sacred rituals, and centuries of culinary alchemy.",
+      "search_bar": {
+        "placeholder": "Search temples, festivals, folk ragas, spices, or endangered scripts...",
+        "tags": ["Hampi Virupaksha", "Kathakali Mudras", "Kashmir Pashmina", "Konark Sun Temple", "Toda Embroidery"]
+      },
+      "cta_buttons": [
+        {"label": "Explore Interactive Map", "target": "map", "variant": "primary"},
+        {"label": "Ask Virana AI", "target": "chat", "variant": "secondary"},
+        {"label": "HeritageLens Camera", "target": "lens", "variant": "outline"},
+        {"label": "Preservation Vault", "target": "preserve", "variant": "ghost"}
+      ],
+      "hero_stats": [
+        {"value": "3,690+", "label": "Monuments & Temples Mapped"},
+        {"value": "780+", "label": "Living Dialects & Folk Songs"},
+        {"value": "120+", "label": "Endangered Crafts & Rituals"},
+        {"value": "100% Free", "label": "Open Heritage Archive"}
+      ]
+    },
+    "category_explorer_grid": {
+      "categories": [
+        {"id": "monuments", "name": "Monuments & Forts", "count": "1,420+", "icon": "Landmark", "tag": "Architectural Marvels"},
+        {"id": "temples", "name": "Sacred Temples & Shrines", "count": "2,180+", "icon": "Sun", "tag": "Spiritual Geometry"},
+        {"id": "dance", "name": "Classical & Folk Dance", "count": "94 Forms", "icon": "Sparkles", "tag": "Mudras & Expressions"},
+        {"id": "music", "name": "Ragas & Rare Instruments", "count": "140+ Traditions", "icon": "Music", "tag": "Acoustic Heritage"},
+        {"id": "food_spices", "name": "Culinary & Ayurvedic Spices", "count": "350+ Recipes & Spices", "icon": "Utensils", "tag": "Living Flavors"},
+        {"id": "crafts", "name": "Handicrafts & Textiles", "count": "220+ GI Crafts", "icon": "Scissors", "tag": "Ancient Weaves"},
+        {"id": "languages", "name": "Languages & Dialects", "count": "780+ Dialects", "icon": "Languages", "tag": "Oral Traditions"},
+        {"id": "festivals", "name": "Festivals & Sacred Seasons", "count": "450+ Celebrations", "icon": "Calendar", "tag": "Cultural Calendar"},
+        {"id": "rituals", "name": "Sacred Rituals & Folk Tales", "count": "600+ Oral Stories", "icon": "BookOpen", "tag": "Living Memory"},
+        {"id": "at_risk", "name": "Heritage at Risk", "count": "48 Critical Items", "icon": "AlertTriangle", "tag": "Urgent Preservation"}
+      ]
+    },
+    "explore_page_map": {
+      "engine": "Interactive Leaflet / Mapbox styled with Dark Basalt & Gold Pins",
+      "filters": ["All", "UNESCO Sites", "Temples", "Endangered Arts", "Tribal Knowledge", "Culinary Heritage"],
+      "state_selector": "Interactive State & Union Territory quick selector (28 States + 8 UTs)",
+      "results_drawer": "Side panel displaying detailed site cards with quick preview, audio narration player, and full story navigation"
+    },
+    "detail_page_structure": {
+      "sections": [
+        "Hero Showcase with High-Res Imagery & Audio Pronunciation",
+        "Key Facts Bento (Who built it, Dynasty, Era, Location, UNESCO Status, Material)",
+        "Deep Storytelling & Historical Narrative",
+        "Sacred Architecture & Engineering Secrets",
+        "Living Traditions & Community Connections",
+        "Chronological Interactive Timeline",
+        "Visual & Sound Archive (Manuscripts, Chants, 360 Gallery)",
+        "Endangerment Status & Community Action Steps"
+      ]
+    },
+    "virana_ai_chat": {
+      "personality": "Wise, reverent, highly factual, culturally nuanced scholar and storytelling guide",
+      "capabilities": [
+        "Explain architectural symbolism (e.g., Gopuram math, Vastu Shastra)",
+        "Translate ancient mantras & contextualize folk proverbs",
+        "Recommend customized cultural trails based on interest",
+        "Provide verifiable historical sources and academic citations"
+      ],
+      "preset_prompts": [
+        "Explain the acoustics of the Golconda whispering gallery",
+        "Why is Kathakali eye movement (Netra Bhedam) practiced for years?",
+        "What are the 7 rare spices unique to Malabar coast?",
+        "Tell the story of how Konark Sun Temple chariot wheels track time"
+      ]
+    },
+    "heritage_lens": {
+      "mechanism": "Drag-and-drop or camera capture visual identification simulation",
+      "output_card": {
+        "identified_name": "Konark Sun Temple - Chariot Wheel",
+        "match_confidence": "99.4%",
+        "era": "13th Century CE (Eastern Ganga Dynasty)",
+        "symbolism": "Sundial calculating exact time through shadow casting on spokes",
+        "action_cta": "Open Deep Heritage Dossier"
+      }
+    },
+    "emotional_preservation_vault": {
+      "title": "What We Could Lose: The Vanishing Heritage of India",
+      "narrative": "Every decade, dozens of indigenous dialects vanish, ancient weave patterns are forgotten, and centuries of oral medicinal wisdom disappear with their elders. Virana lets communities digitize and immortalize their living culture before it's gone.",
+      "urgent_cases": [
+        {"title": "Great Andamanese Dialects", "status": "Under 5 fluent speakers", "urgency": "Critical"},
+        {"title": "Usta Gold Art of Bikaner", "status": "Only 8 master families left", "urgency": "High"},
+        {"title": "Kavu Sacred Groves of Kerala", "status": "Fragmenting biological-ritual sanctuaries", "urgency": "Moderate"}
+      ]
+    }
+  },
+  "motion_and_microinteractions": {
+    "hover_states": "translate-y-[-4px] transition-all duration-300 shadow-[0_12px_30px_rgba(232,155,23,0.15)] border-primary/40",
+    "stagger_reveal": "framer-motion staggered opacity & upward translation on list cards (staggerChildren: 0.08)",
+    "active_tracing_glow": "Subtle 1px gold outline with animated background gradient mask on spotlight cards",
+    "scroll_behavior": "Smooth scrolling with section link anchors and back-to-top floating button"
+  },
+  "accessibility_and_testing": {
+    "contrast_standard": "WCAG AA (4.5:1 minimum for normal text, 3:1 for large display)",
+    "focus_states": "focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-background",
+    "test_id_mandate": "All buttons, inputs, filter chips, dropdowns, and cards MUST include role-based data-testid attributes (e.g. data-testid='explore-map-button', data-testid='search-input', data-testid='category-card-monuments')"
+  },
+  "instructions_to_main_agent": [
+    "1. Read this entire /app/design_guidelines.json file before implementing UI components.",
+    "2. Build rich, high-fidelity components with real cultural depth and rich textual storytelling. Avoid placeholder 'Lorem Ipsum' or shallow generic mockups.",
+    "3. Use the provided Unsplash image URLs directly in the hero carousel, category cards, and detail modal/pages.",
+    "4. Ensure both Dark mode (default deep basalt/gold) and Light mode (sandstone parchment) render flawlessly.",
+    "5. Use Lucide icons (Landmark, Sparkles, Music, MapPin, Compass, Search, Calendar, Shield, Camera, Heart, Share2, Volume2, Globe).",
+    "6. Include multilingual strings for key headers so switching EN/HI/TE instantly translates the UI.",
+    "7. Implement interactive features: Leaflet Map with filtered markers, AI Chat simulation with rich formatted responses and voice narration audio synthesizer (SpeechSynthesis API), HeritageLens camera/upload drag-drop analyzer with realistic match results, and Community Contribution modal.",
+    "8. Maintain data-testid on every interactive element."
+  ]
+}

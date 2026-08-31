@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rozha+One&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 30% 98%;
+    --foreground: 20 25% 10%;
+    --card: 36 28% 95%;
+    --card-foreground: 20 25% 12%;
+    --popover: 35 30% 98%;
+    --popover-foreground: 20 25% 10%;
+    --primary: 24 85% 45%;
+    --primary-foreground: 35 30% 98%;
+    --secondary: 38 45% 90%;
+    --secondary-foreground: 24 70% 20%;
+    --muted: 36 20% 92%;
+    --muted-foreground: 25 15% 40%;
+    --accent: 42 90% 48%;
+    --accent-foreground: 20 30% 10%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 20% 86%;
+    --input: 35 20% 86%;
+    --ring: 24 85% 45%;
+    --radius: 0.75rem;
+    --heritage-saffron: 27 96% 54%;
+    --heritage-gold: 43 89% 52%;
+    --heritage-terracotta: 16 75% 48%;
+    --heritage-indigo: 228 65% 24%;
+    --heritage-emerald: 158 64% 32%;
+  }
+  .dark {
+    --background: 220 25% 6%;
+    --foreground: 38 25% 94%;
+    --card: 220 24% 9%;
+    --card-foreground: 38 25% 96%;
+    --popover: 220 24% 9%;
+    --popover-foreground: 38 25% 96%;
+    --primary: 28 92% 54%;
+    --primary-foreground: 220 30% 8%;
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 38 30% 92%;
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 12% 65%;
+    --accent: 43 92% 54%;
+    --accent-foreground: 220 30% 8%;
+    --destructive: 0 68% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 18% 18%;
+    --input: 220 18% 18%;
+    --ring: 28 92% 54%;
+    --heritage-saffron: 28 94% 56%;
+    --heritage-gold: 43 95% 56%;
+    --heritage-terracotta: 16 80% 55%;
+    --heritage-indigo: 224 75% 65%;
+    --heritage-emerald: 158 60% 45%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, .font-display {
+    font-family: "Cormorant Garamond", "Cinzel Decorative", serif;
+    letter-spacing: -0.01em;
+  }
+  .font-cinzel { font-family: "Cinzel Decorative", serif; letter-spacing: 0.02em; }
+  .font-devanagari { font-family: "Rozha One", serif; }
+  .font-mono { font-family: "JetBrains Mono", monospace; }
+  .font-body { font-family: "Plus Jakarta Sans", sans-serif; }
+  .font-outfit { font-family: "Outfit", sans-serif; }
+}
+
+@layer utilities {
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.7 0 0 0 0 0.3 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.06;
+    pointer-events: none;
+  }
+  .glass {
+    backdrop-filter: blur(18px) saturate(140%);
+    background-color: hsl(var(--background) / 0.72);
+  }
+  .heritage-glow {
+    box-shadow: 0 12px 40px -8px hsl(var(--heritage-gold) / 0.28),
+                0 0 0 1px hsl(var(--heritage-gold) / 0.12) inset;
+  }
+  .text-saffron { color: hsl(var(--heritage-saffron)); }
+  .text-gold { color: hsl(var(--heritage-gold)); }
+  .bg-saffron { background-color: hsl(var(--heritage-saffron)); }
+  .bg-gold { background-color: hsl(var(--heritage-gold)); }
+  .border-gold { border-color: hsl(var(--heritage-gold) / 0.4); }
+  .gradient-royal {
+    background: linear-gradient(135deg,
+      hsl(var(--heritage-indigo)) 0%,
+      hsl(var(--heritage-terracotta)) 60%,
+      hsl(var(--heritage-gold)) 100%);
+  }
+  .gradient-parchment {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%);
+  }
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -10px hsl(var(--heritage-gold) / 0.25);
+    border-color: hsl(var(--heritage-gold) / 0.55);
+  }
+  .scroll-fade-mask {
+    mask-image: linear-gradient(180deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  }
+  .caption {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    font-family: "JetBrains Mono", monospace;
+    color: hsl(var(--heritage-gold));
+    font-weight: 600;
+  }
+}
+
+/* Leaflet dark tweaks */
+.dark .leaflet-container { background: hsl(220 25% 8%); }
+.leaflet-container { font-family: "Plus Jakarta Sans", sans-serif; border-radius: 1rem; }
+.leaflet-control-attribution { font-size: 10px !important; opacity: 0.6; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--heritage-gold) / 0.5); }
