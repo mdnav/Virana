@@ -17,6 +17,7 @@ load_dotenv(ROOT_DIR / '.env')
 import auth as auth_module
 import users as users_module
 import festivals as festivals_module
+import map_service as map_module
 
 MONGO_URL = os.environ['MONGO_URL']
 DB_NAME = os.environ['DB_NAME']
@@ -61,6 +62,7 @@ class LensResult(BaseModel):
 auth_module.init(db)
 users_module.init(db)
 festivals_module.init(db)
+map_module.init(db)
 
 
 @app.on_event("startup")
@@ -87,6 +89,7 @@ async def seed_db():
         await db.email_verification_tokens.create_index("expires_at", expireAfterSeconds=0)
         await db.saved_items.create_index([("user_id", 1), ("item_type", 1), ("item_id", 1)])
         await db.festivals.create_index("start_date")
+        await map_module.build_map_records()
         await auth_module.seed_demo_user()
     except Exception as e:
         logger.exception(f"Seeding failed: {e}")
@@ -354,6 +357,7 @@ async def heritage_lens(req: LensRequest):
 api_router.include_router(auth_module.router)
 api_router.include_router(users_module.router)
 api_router.include_router(festivals_module.router)
+api_router.include_router(map_module.router)
 
 app.include_router(api_router)
 

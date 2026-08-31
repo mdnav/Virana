@@ -105,3 +105,15 @@ export const fetchUpcomingFestivals = (limit = 6) => api.get("/festivals/upcomin
 export const fetchFestivalById = (id) => api.get(`/festivals/${id}`).then(r => r.data);
 export const toggleReminder = (id) => api.post(`/festivals/${id}/remind`).then(r => r.data);
 export const reminderStatus = (id) => api.get(`/festivals/${id}/reminder-status`).then(r => r.data);
+
+// Map (geospatial)
+export const fetchMapMeta = () => api.get("/map/meta").then(r => r.data);
+export const fetchMapRecords = (params = {}) => api.get("/map/records", { params }).then(r => r.data);
+export const fetchRegionStats = () => api.get("/map/regions").then(r => r.data.regions);
+export const fetchRegionProfile = (state) => api.get(`/map/regions/${encodeURIComponent(state)}`).then(r => r.data);
+export const mapSearch = (q) => api.get("/map/search", { params: { q } }).then(r => r.data);
+export const mapNearby = (lat, lng, radius = 25000) => api.get("/map/nearby", { params: { lat, lng, radius } }).then(r => r.data);
+export const mapTrack = (ref_type, ref_id, event = "location_opened") => api.post("/map/track", { ref_type, ref_id, event }).then(r => r.data).catch(() => {});
+export const mapRecordStats = (ref_type, ref_id) => api.get(`/map/record/${ref_type}/${ref_id}/stats`).then(r => r.data);
+export const mapAiSearch = (query) => api.post("/map/ai-search", { query }).then(r => r.data);
+export const mapAiRegion = (payload) => api.post("/map/ai-region", payload).then(r => r.data);
