@@ -220,32 +220,47 @@ SYSTEM_PROMPT = (
 @api_router.post("/ai/ask", response_model=ChatResponse)
 async def ai_ask(req: ChatRequest):
     if not GEMINI_API_KEY:
-        raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured")
-    try:
-    from google import genai
-except Exception as e:
-    raise HTTPException(status_code=500, detail=f"Google GenAI SDK not available: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="GEMINI_API_KEY not configured"
+        )
 
     snippets = get_context_snippets(req.message)
+
     context_text = ""
     sources = []
+
     for s in snippets:
-        context_text += f"\n- {s['name']} ({s.get('state','')}): {s.get('short','')}"
+        context_text += (
+            f"\n- {s['name']} ({s.get('state', '')}): "
+            f"{s.get('short', '')}"
+        )
         sources.append(s["name"])
 
     system_message = SYSTEM_PROMPT + (
-        "\n\nKNOWLEDGE (from Virana database):" + context_text if context_text else ""
+        "\n\nKNOWLEDGE (from Virana database):" + context_text
+        if context_text
+        else ""
     )
 
-    chat = (LlmChat(api_key=EMERGENT_LLM_KEY, session_id=req.session_id, system_message=system_message)
-            .with_model("gemini", "gemini-3.1-pro-preview"))
-
     try:
-        response = await chat.send_message(UserMessage(text=req.message))
-        text = response if isinstance(response, str) else str(response)
+        from google import genai
+
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=system_message + "\n\nUSER QUESTION:\n" + req.message,
+        )
+
+        text = response.text
+
     except Exception as e:
         logger.exception("Gemini call failed")
-        raise HTTPException(status_code=502, detail=f"AI service error: {e}")
+        raise HTTPException(
+            status_code=502,
+            detail=f"AI service error: {e}"
+        )
 
     # persist message
     try:
@@ -255,6 +270,7 @@ except Exception as e:
             "text": req.message,
             "created_at": datetime.now(timezone.utc).isoformat(),
         })
+
         await db.chat_messages.insert_one({
             "session_id": req.session_id,
             "role": "assistant",
@@ -262,10 +278,15 @@ except Exception as e:
             "sources": sources,
             "created_at": datetime.now(timezone.utc).isoformat(),
         })
+
     except Exception:
         pass
 
-    return ChatResponse(session_id=req.session_id, reply=text, sources=sources)
+    return ChatResponse(
+        session_id=req.session_id,
+        reply=text,
+        sources=sources
+    )
 
 
 # ---------- AI: HeritageLens (vision) ----------
@@ -281,31 +302,43 @@ LENS_SYSTEM = (
 )
 
 
-@api_router.post("/heritage-lens/analyze", response_model=LensResult)
 async def heritage_lens(req: LensRequest):
-    if not EMERGENT_LLM_KEY:
-        raise HTTPException(status_code=500, detail="EMERGENT_LLM_KEY not configured")
+    if not GEMINI_API_KEY:
+        raise HTTPException(
+            status_code=500,
+            detail="GEMINI_API_KEY not configured"
+        )
+
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
+        from google import genai
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"emergentintegrations not available: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Google GenAI SDK not available: {e}"
+        )
 
     # Strip data URL prefix if present
     b64 = req.image_base64
     if "," in b64 and b64.startswith("data:"):
         b64 = b64.split(",", 1)[1]
 
-    session_id = f"lens-{uuid.uuid4()}"
-    chat = (LlmChat(api_key=EMERGENT_LLM_KEY, session_id=session_id, system_message=LENS_SYSTEM)
-            .with_model("gemini", "gemini-3.1-pro-preview"))
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
     try:
-        img = ImageContent(image_base64=b64)
-        raw = await chat.send_message(UserMessage(
-            text="Identify this Indian heritage subject and return STRICT JSON.",
-            file_contents=[img],
-        ))
-        text = raw if isinstance(raw, str) else str(raw)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=[
+            {
+                "inline_data": {
+                    "mime_type": req.mime_type,
+                    "data": b64,
+                }
+            },
+            LENS_SYSTEM + "\n\nIdentify this Indian heritage subject and return STRICT JSON."
+        ],
+    )
+
+    text = response.text
     except Exception as e:
         logger.exception("Gemini vision failed")
         raise HTTPException(status_code=502, detail=f"Vision AI error: {e}")

@@ -13,7 +13,6 @@ from festival_seed import FESTIVAL_SEED
 logger = logging.getLogger("virana.map")
 router = APIRouter(prefix="/map", tags=["map"])
 _db = None
-EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY")
 
 # ---- Layer taxonomy (single source of truth, mirrored on frontend) ----
 LAYER_META = {
@@ -291,55 +290,100 @@ AI_SEARCH_SYSTEM = (
 
 @router.post("/ai-search")
 async def ai_search(body: AiSearch):
-    fallback = {"layers": [], "state": None, "district": None, "risk": False,
-                "festival": None, "month": None, "answer": "Showing results on the map."}
-    if not EMERGENT_LLM_KEY:
+
+    fallback = {
+        "layers": [],
+        "state": None,
+        "district": None,
+        "risk": False,
+        "festival": None,
+        "month": None,
+        "answer": "Showing results on the map."
+    }
+
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
+    if not GEMINI_API_KEY:
         return fallback
+
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-        chat = (LlmChat(api_key=EMERGENT_LLM_KEY, session_id=f"mapsearch-{uuid.uuid4()}",
-                        system_message=AI_SEARCH_SYSTEM)
-                .with_model("gemini", "gemini-3.1-pro-preview"))
-        raw = await chat.send_message(UserMessage(text=body.query))
-        text = raw if isinstance(raw, str) else str(raw)
+        from google import genai
+
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=AI_SEARCH_SYSTEM + "\n\nUSER QUERY:\n" + body.query,
+        )
+
+        text = response.text
+
         s, e = text.find("{"), text.rfind("}")
-        parsed = json.loads(text[s:e+1]) if s >= 0 and e > s else fallback
+
+        parsed = (
+            json.loads(text[s:e + 1])
+            if s >= 0 and e > s
+            else fallback
+        )
+
         for k, v in fallback.items():
             parsed.setdefault(k, v)
+
         return parsed
+
     except Exception as ex:
         logger.exception("ai-search failed")
         return fallback
-
 
 class AiRegion(BaseModel):
     state: Optional[str] = None
     district: Optional[str] = None
     question: str
 
-
 @router.post("/ai-region")
 async def ai_region(body: AiRegion):
-    if not EMERGENT_LLM_KEY:
-        raise HTTPException(500, "EMERGENT_LLM_KEY not configured")
+
+    GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
+    if not GEMINI_API_KEY:
+        raise HTTPException(500, "GEMINI_API_KEY not configured")
+
     loc = body.district or body.state or "this region"
+
     q = {"state": body.state} if body.state else {}
+
     docs = await _db.map_records.find(q, _proj()).limit(40).to_list(length=40)
-    ctx = "\n".join(f"- {d['name']} ({d['layer']}, {d.get('district') or ''}): {d.get('short','')[:140]}"
-                    for d in docs)
+
+    ctx = "\n".join(
+        f"- {d['name']} ({d['layer']}, {d.get('district') or ''}): {d.get('short','')[:140]}"
+        for d in docs
+    )
+
     system = (
         f"You are Virana AI answering about the cultural heritage of {loc}, India. "
         "Be accurate, reverent and concise. Respect regional variation, preserve original names, "
         "never invent facts and note uncertainty. Use the KNOWLEDGE from Virana's database when relevant.\n\n"
-        f"KNOWLEDGE:\n{ctx}"
+        f"KNOWLEDGE:\n{ctx}\n\n"
+        f"USER QUESTION:\n{body.question}"
     )
+
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-        chat = (LlmChat(api_key=EMERGENT_LLM_KEY, session_id=f"mapregion-{uuid.uuid4()}",
-                        system_message=system)
-                .with_model("gemini", "gemini-3.1-pro-preview"))
-        raw = await chat.send_message(UserMessage(text=body.question))
-        return {"answer": raw if isinstance(raw, str) else str(raw), "location": loc}
+        from google import genai
+
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=system,
+        )
+
+        text = response.text
+
+        return {
+            "answer": text,
+            "location": loc
+        }
+
     except Exception as ex:
         logger.exception("ai-region failed")
         raise HTTPException(502, f"AI error: {ex}")
