@@ -21,7 +21,7 @@ import map_service as map_module
 
 MONGO_URL = os.environ['MONGO_URL']
 DB_NAME = os.environ['DB_NAME']
-EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 
 client = AsyncIOMotorClient(MONGO_URL)
 db = client[DB_NAME]
@@ -219,12 +219,12 @@ SYSTEM_PROMPT = (
 
 @api_router.post("/ai/ask", response_model=ChatResponse)
 async def ai_ask(req: ChatRequest):
-    if not EMERGENT_LLM_KEY:
-        raise HTTPException(status_code=500, detail="EMERGENT_LLM_KEY not configured")
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured")
     try:
-        from emergentintegrations.llm.chat import LlmChat, UserMessage
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"emergentintegrations not available: {e}")
+    from google import genai
+except Exception as e:
+    raise HTTPException(status_code=500, detail=f"Google GenAI SDK not available: {e}")
 
     snippets = get_context_snippets(req.message)
     context_text = ""
