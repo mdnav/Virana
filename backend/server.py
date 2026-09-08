@@ -325,24 +325,27 @@ async def heritage_lens(req: LensRequest):
     client = genai.Client(api_key=GEMINI_API_KEY)
 
     try:
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[
-            {
-                "inline_data": {
-                    "mime_type": req.mime_type,
-                    "data": b64,
-                }
-            },
-            LENS_SYSTEM + "\n\nIdentify this Indian heritage subject and return STRICT JSON."
-        ],
-    )
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=[
+                {
+                    "inline_data": {
+                        "mime_type": req.mime_type,
+                        "data": b64,
+                    }
+                },
+                LENS_SYSTEM + "\n\nIdentify this Indian heritage subject and return STRICT JSON."
+            ],
+        )
 
-    text = response.text
+        text = response.text
+
     except Exception as e:
         logger.exception("Gemini vision failed")
-        raise HTTPException(status_code=502, detail=f"Vision AI error: {e}")
-
+        raise HTTPException(
+            status_code=502,
+            detail=f"Vision AI error: {e}"
+        )
     # Parse JSON (be lenient)
     parsed = None
     for candidate in (text, text.strip().strip("`")):
