@@ -7,6 +7,7 @@ Discover • Connect • Document • Preserve
   🌐 <strong><a href="https://virana.vercel.app/">Live Demo</a></strong>
 </p>
 Explore the live application and experience Virana's cultural discovery platform.
+<br>
 🌏 About
 Virana is an AI-powered, community-driven platform for discovering, documenting, connecting, and preserving India's living cultural heritage.
 
